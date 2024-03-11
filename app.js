@@ -2,6 +2,12 @@ const express = require("express");
 const app = express();
 const ExpressError = require("./EpressError.js");
 
+app.use((req,res,next)=>{
+    req.responseTime = new Date(Date.now()).toString();
+    console.log(req.method,req.path);
+    next();
+})
+
 const checkToken = (req,res,next)=>{
     let {token} = req.query;
     if(token=="giveaccess"){
